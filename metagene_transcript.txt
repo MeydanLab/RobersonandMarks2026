@@ -1,0 +1,75 @@
+# Input file for transcript-wide metagene output.
+# Output columns: site, position, and one column per input dataset.
+
+# Comma-separated list of .pkl.gzip files
+INPUT_picklenames
+/Users/marksjp/Documents/Papers/AzaC/Pkls/JM011Fd_49to73nt_trim2.pkl.gzip,/Users/marksjp/Documents/Papers/AzaC/Pkls/JM012Fd_49to73nt_trim2.pkl.gzip,/Users/marksjp/Documents/Papers/AzaC/Pkls/JM013Fd_49to73nt_trim2.pkl.gzip,/Users/marksjp/Documents/Papers/AzaC/Pkls/JM014Fd_49to73nt_trim2.pkl.gzip,/Users/marksjp/Documents/Papers/AzaC/Pkls/JM015Fd_49to73nt_trim2.pkl.gzip,/Users/marksjp/Documents/Papers/AzaC/Pkls/JM016Fd_49to73nt_trim2.pkl.gzip
+
+
+
+# Output csv path (without .csv extension)
+INPUT_outfile
+/Users/marksjp/Documents/Papers/AzaC/Prism/Final/Disome_metagene
+
+# Must be all_5 (read_offset5 is defined from the 5' read end)
+INPUT_endmode
+all_5
+
+# 1 = normalize each gene by CDS density before averaging, 0 = raw average
+INPUT_equalweighting
+1
+
+# Minimum CDS density threshold in rpkm-like units
+INPUT_genethresh
+1
+
+# Shift 5' aligned reads by this many nucleotides (e.g., 13 for P-site style offset)
+INPUT_read_offset5
+42
+
+# Bins for length-normalized regions
+INPUT_bins5
+100
+
+INPUT_binscds
+300
+
+INPUT_bins3
+100
+
+# =========================
+# Aggregation/Normalization Mode Selection
+# =========================
+# INPUT_aggregation_option controls how per-gene vectors are combined.
+# Include "current settings" plus options 1-6:
+# 0 = current settings (legacy behavior): arithmetic mean of per-gene CDS-normalized vectors
+# 1 = exclude listed high-leverage genes, then arithmetic mean
+# 2 = winsorized mean (caps per-position extremes using INPUT_winsor_percentile)
+# 3 = median across genes at each position (DEFAULT)
+# 4 = trimmed mean across genes at each position (uses INPUT_trim_fraction)
+# 5 = log-mean (mean of log1p values, then expm1 back-transform)
+# 6 = robust within-gene scaling first (INPUT_robust_method), then arithmetic mean
+INPUT_aggregation_option
+2
+
+# Mean option selector (default mean option = 1)
+# 1 = arithmetic mean (currently the supported mean implementation)
+INPUT_mean_option
+1
+
+# Option 1: comma-separated RefSeq gene IDs to exclude (e.g. NM_001261841.2)
+INPUT_exclude_genes
+
+# Option 2: winsor percentile (upper cap percentile; lower cap uses 100-percentile)
+INPUT_winsor_percentile
+99
+
+# Option 4: trimmed fraction removed from each tail (0.1 = 10% low + 10% high)
+INPUT_trim_fraction
+0.1
+
+# Option 6: robust within-gene scaling method
+# mad = (x - median) / (1.4826 * MAD) [default]
+# zscore = (x - mean) / sd
+INPUT_robust_method
+mad
