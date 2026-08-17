@@ -1,0 +1,5 @@
+sample	Sequencing_pool	Genotype	Group	Inducer
+JM011M_Aligned.sortedByCoord.out.bam	ML012	WT	Control	None
+JM012M_Aligned.sortedByCoord.out.bam	ML012	WT	Control	None
+JM015M_Aligned.sortedByCoord.out.bam	ML012	WT	Treated	Comparison
+JM016M_Aligned.sortedByCoord.out.bam	ML012	WT	Treated	Comparison
